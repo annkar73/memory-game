@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue';
+import { playFlipSound, playMatchSound, playWinningSound } from '@/assets/utils/soundManager';
 
 // Importera bilderna direkt
 import img1 from '@/assets/images/img-1.png'
@@ -29,7 +30,8 @@ const selectCard = (index: number) => {
     !selectedCards.value.includes(index) &&
     !matchedCards.value.includes(index)
   ) {
-    selectedCards.value.push(index)
+    selectedCards.value.push(index);
+    playFlipSound(); // Spelar upp flip sound
 
     if (selectedCards.value.length === 2) {
       setTimeout(checkForMatch, 1000)
@@ -40,7 +42,8 @@ const selectCard = (index: number) => {
 const checkForMatch = () => {
   const [firstIndex, secondIndex] = selectedCards.value
   if (cards.value[firstIndex] === cards.value[secondIndex]) {
-    matchedCards.value.push(firstIndex, secondIndex)
+    matchedCards.value.push(firstIndex, secondIndex);
+    playMatchSound(); // spela upp match sound vid matchning
   }
   selectedCards.value = []
 }
@@ -50,6 +53,14 @@ const resetGame = () => {
   selectedCards.value = []
   matchedCards.value = []
 }
+
+const isGameOver = computed(() => matchedCards.value.length === cards.value.length);
+
+watch(isGameOver, (gameOver) => {
+  if (gameOver) {
+    playWinningSound(); // spela upp winning sound när spelet är över
+  }
+});
 </script>
 
 <template>
@@ -77,7 +88,7 @@ const resetGame = () => {
           </div>
         </div>
       </div>
-      <div v-if="matchedCards.length === cards.length" class="game-over">
+      <div v-if="isGameOver" class="game-over">
         <p>Grattis! Du har hittat alla par!</p>
         <button class="resetBtn" @click="resetGame">Spela igen</button>
       </div>
