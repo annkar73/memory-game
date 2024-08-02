@@ -89,8 +89,8 @@ const resetGame = () => {
 h1 {
   font-weight: bold;
   background-color: hotpink;
-  margin-top: 35px;
-  margin-bottom: 45px;
+  margin-top: 0;
+  margin-bottom: 35px;
   width: 630px;
   height: 50px;
 }
@@ -110,8 +110,8 @@ h1 {
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(4, 150px);
-  grid-template-rows: repeat(4, 150px);
+  grid-template-columns: repeat(4, 120px);
+  grid-template-rows: repeat(4, 120px);
   gap: 10px;
   padding: 20px;
 }
@@ -123,8 +123,8 @@ h1 {
 
 .card-inner {
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   transform-style: preserve-3d;
   transition: transform 0.5s;
 }
