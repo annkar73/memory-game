@@ -15,7 +15,6 @@ import GameBoard from './components/GameBoard.vue';
   background-color: lightgoldenrodyellow;
   color: #36251b;
   margin-top: 60px;
-  overflow: hidden;
 }
 
 </style>
