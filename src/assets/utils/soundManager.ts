@@ -11,4 +11,8 @@ const winningAudio = new Audio(winningSound);
 // Exportera funktioner för att spela ljud
 export const playFlipSound = () => flipAudio.play();
 export const playMatchSound = () => matchAudio.play();
-export const playWinningSound = () => winningAudio.play();
+export const playWinningSound = (delay: number = 1000) => {
+    setTimeout(() => {
+        winningAudio.play();
+    }, delay);
+};
