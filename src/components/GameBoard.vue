@@ -89,7 +89,7 @@ const resetGame = () => {
 h1 {
   font-weight: bold;
   background-color: hotpink;
-  margin-top: 0;
+  margin-top: 10px;
   margin-bottom: 35px;
   width: 630px;
   height: 50px;
