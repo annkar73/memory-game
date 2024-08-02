@@ -139,6 +139,7 @@ h1 {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+
 }
 
 .card-front {
@@ -146,7 +147,7 @@ h1 {
 }
 
 .card-back {
-  background-color: #bbb;
+  background-color: lightgoldenrodyellow;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,6 +158,8 @@ h1 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 25px;
+
 }
 
 .game-over {
