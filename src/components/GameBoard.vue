@@ -150,11 +150,14 @@ h1 {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-
+  -webkit-backface-visibility: hidden;
+  border-radius: 25px;
+  overflow: hidden;
 }
 
 .card-front {
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
 }
 
 .card-back {
@@ -162,6 +165,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 25px;
 }
 
 .card-front img,
