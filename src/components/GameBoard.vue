@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { playFlipSound, playMatchSound, playWinningSound } from '@/assets/utils/soundManager';
+import MoveCounter from './MoveCounter.vue';
 
 // Importera bilderna direkt
 import img1 from '@/assets/images/img-1.png'
@@ -20,9 +21,10 @@ const generateDeck = () => {
   return deck.sort(() => Math.random() - 0.5)
 }
 
-const cards = ref<string[]>(generateDeck())
-const selectedCards = ref<number[]>([])
-const matchedCards = ref<number[]>([])
+const cards = ref<string[]>(generateDeck());
+const selectedCards = ref<number[]>([]);
+const matchedCards = ref<number[]>([]);
+const moveCount = ref<number>(0);
 
 const selectCard = (index: number) => {
   if (
@@ -34,6 +36,7 @@ const selectCard = (index: number) => {
     playFlipSound(); // Spelar upp flip sound
 
     if (selectedCards.value.length === 2) {
+      moveCount.value++;
       setTimeout(checkForMatch, 1000)
     }
   }
@@ -49,9 +52,10 @@ const checkForMatch = () => {
 }
 
 const resetGame = () => {
-  cards.value = generateDeck()
-  selectedCards.value = []
-  matchedCards.value = []
+  cards.value = generateDeck();
+  selectedCards.value = [];
+  matchedCards.value = [];
+  moveCount.value = 0;
 }
 
 const isGameOver = computed(() => matchedCards.value.length === cards.value.length);
@@ -88,6 +92,9 @@ watch(isGameOver, (gameOver) => {
           </div>
         </div>
       </div>
+
+      <MoveCounter :moveCount="moveCount" />
+
       <div v-if="isGameOver" class="game-over">
         <p>Grattis! Du har hittat alla par!</p>
         <button class="resetBtn" @click="resetGame">Spela igen</button>
